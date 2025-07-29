@@ -1,21 +1,33 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.auth.LoginDTO;
+import com.example.demo.dto.user.UserRequestDTO;
 import com.example.demo.dto.user.UserResponseDTO;
 import com.example.demo.security.model.UserDetailsImpl;
+import com.example.demo.service.AuthService;
+import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/auth")
 public class AuthController {
 
-    @GetMapping("/me")
-    public ResponseEntity<UserResponseDTO> userData(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        UserResponseDTO user = service.userData(userDetails);
-        return ResponseEntity.ok().body(user);
+    @Autowired
+    private AuthService service;
 
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody UserRequestDTO request){
+        service.registerUser(request);
+        return new ResponseEntity<>("Usuário Criado com sucesso!",HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginDTO request){
+        service.authenticateUser(request);
+        return new ResponseEntity<>("Usário autenticado com sucesso", HttpStatus.OK);
     }
 }
