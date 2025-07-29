@@ -29,12 +29,12 @@ public class SecurityConfiguration {
 
     // Endpoints que exigem perfil de Usuário
     public static final String[] ENDPOINTS_USER = {
-            "/users/me"
+            "users/user/me"
     };
 
     // Endpoints que exigem perfil de ADMIN
     public static final String[] ENDPOINTS_ADMIN = {
-
+            "users/admin/me"
     };
 
     @Bean

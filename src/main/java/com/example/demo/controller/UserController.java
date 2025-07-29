@@ -18,8 +18,15 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/me")
+    @GetMapping("/user/me")
     public ResponseEntity<UserResponseDTO> userData(@AuthenticationPrincipal String username){
+        UserResponseDTO user = service.userData(username);
+        return ResponseEntity.ok().body(user);
+
+    }
+
+    @GetMapping("/admin/me")
+    public ResponseEntity<UserResponseDTO> adminData(@AuthenticationPrincipal String username){
         UserResponseDTO user = service.userData(username);
         return ResponseEntity.ok().body(user);
 
