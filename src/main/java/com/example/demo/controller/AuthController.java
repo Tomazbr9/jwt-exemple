@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.auth.JwtTokenDTO;
 import com.example.demo.dto.auth.LoginDTO;
 import com.example.demo.dto.user.UserRequestDTO;
 import com.example.demo.dto.user.UserResponseDTO;
+import com.example.demo.model.UserModel;
 import com.example.demo.security.model.UserDetailsImpl;
 import com.example.demo.service.AuthService;
 import org.apache.coyote.Response;
@@ -26,8 +28,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDTO request){
-        service.authenticateUser(request);
-        return new ResponseEntity<>("Usário autenticado com sucesso", HttpStatus.OK);
+    public ResponseEntity<JwtTokenDTO> authenticateUser(@RequestBody LoginDTO request){
+        JwtTokenDTO token = service.authenticateUser(request);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }

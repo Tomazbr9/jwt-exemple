@@ -30,5 +30,5 @@ public class UserModel implements Serializable {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private List<RoleModel> roles;
 }

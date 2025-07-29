@@ -3,6 +3,7 @@ package com.example.demo.security.filter;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.demo.model.UserModel;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.SecurityConfiguration;
 import com.example.demo.security.jwt.JwtTokenService;
 import com.example.demo.security.model.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
@@ -86,6 +87,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
     // Verifica se o endpoint está em uma lista de rotas públicas (sem autenticação)
     private boolean checkIfEndpointIsNotPublic(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
+
         return !Arrays.asList(SecurityConfiguration.ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED)
                 .contains(requestURI);
     }

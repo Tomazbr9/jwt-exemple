@@ -19,8 +19,8 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/me")
-    public ResponseEntity<UserResponseDTO> userData(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        UserResponseDTO user = service.userData(userDetails);
+    public ResponseEntity<UserResponseDTO> userData(@AuthenticationPrincipal String username){
+        UserResponseDTO user = service.userData(username);
         return ResponseEntity.ok().body(user);
 
     }

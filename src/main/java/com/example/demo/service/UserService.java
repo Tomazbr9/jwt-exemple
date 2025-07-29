@@ -13,9 +13,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserResponseDTO userData(UserDetailsImpl userDetails){
+    public UserResponseDTO userData(String username){
 
-        UserModel user = userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        UserModel user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         return new UserResponseDTO(user.getUsername(), user.getEmail());
 
 
